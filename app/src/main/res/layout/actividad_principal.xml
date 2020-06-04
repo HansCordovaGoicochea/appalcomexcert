@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:src="@drawable/logo_alcomex"
+        android:layout_gravity="center_horizontal|top"
+        />
+
+    <customfonts.MyTextView_Poppins_Bold
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filtros de busqueda"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:layout_marginBottom="3dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                android:id="@+id/congratulation_card"
+                app:cardBackgroundColor="@color/grey"
+                app:cardElevation="0dp"
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/blue_border_rounded_cornwe">
+
+                        <!-- INPUT -->
+                        <customfonts.EditText_Poppins_Regular
+                            android:id="@+id/tvNombres"
+                            android:hint="Nombres"
+                            android:textSize="14sp"
+                            android:paddingLeft="17dp"
+                            android:paddingRight="17dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:maxLines="1"
+                            android:maxLength="15"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/blue_border_rounded_cornwe">
+
+                        <!-- INPUT -->
+                        <customfonts.EditText_Poppins_Regular
+                            android:id="@+id/tvApellidos"
+                            android:hint="Apellidos"
+                            android:textSize="14sp"
+                            android:paddingLeft="17dp"
+                            android:paddingRight="17dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:maxLines="1"
+                            android:maxLength="15"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/blue_border_rounded_cornwe">
+
+                        <!-- INPUT -->
+                        <customfonts.EditText_Poppins_Regular
+                            android:id="@+id/tvDNI"
+                            android:hint="DNI"
+                            android:textSize="14sp"
+                            android:paddingLeft="17dp"
+                            android:paddingRight="17dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:maxLines="1"
+                            android:inputType="number"
+                            android:maxLength="15"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_marginTop="5dp"
+                        >
+                        <RelativeLayout
+                            android:layout_weight="1.2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp">
+
+                            <customfonts.Button_Poppins_Regular
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:background="@drawable/blue_border_rounded_cornwe"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:text="Buscar"
+                                android:layout_marginRight="5dp"/>
+                            <!-- ICON -->
+                            <ImageView
+                                android:tint="@color/white"
+                                android:elevation="2dp"
+                                android:id="@+id/search_icon1"
+                                app:srcCompat="@drawable/search"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_weight=".8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp">
+
+                            <customfonts.Button_Poppins_Regular
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:background="@drawable/blue_border_rounded_cornwe"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:text="Buscar por empresa"
+                                android:layout_marginRight="5dp"/>
+                            <!-- ICON -->
+                            <ImageView
+                                android:tint="@color/white"
+                                android:elevation="2dp"
+                                android:id="@+id/search_icon2"
+                                app:srcCompat="@drawable/search"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="4dp"
+                android:id="@+id/buscar_empresa"
+                app:cardElevation="0dp"
+                android:visibility="visible"
+                >
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    >
+
+                    <customfonts.MyTextView_Poppins_Bold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Buscar por empresa"
+                        android:textColor="@color/colorAccent"
+                        android:gravity="center"/>
+
+                    <LinearLayout
+                        android:padding="10dp"
+                        android:background="@color/grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/blue_border_rounded_cornwe">
+
+
+                            <Spinner
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/blue_border_rounded_cornwe">
+
+                            <!-- INPUT -->
+                            <customfonts.EditText_Poppins_Regular
+                                android:id="@+id/tvRuc"
+                                android:hint="RUC"
+                                android:textSize="14sp"
+                                android:paddingLeft="17dp"
+                                android:paddingRight="17dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                                android:maxLines="1"
+                                android:inputType="number"
+                                android:maxLength="15"
+                                android:background="@android:color/transparent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/blue_border_rounded_cornwe">
+
+
+                            <Spinner
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginTop="5dp"
+                            >
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="2.5dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/blue_border_rounded_cornwe">
+
+                                <!-- INPUT -->
+                                <customfonts.EditText_Poppins_Regular
+                                    android:id="@+id/tvDesde"
+                                    android:layout_toRightOf="@+id/username_icon"
+                                    android:hint="DESDE"
+                                    android:textSize="14sp"
+                                    android:paddingLeft="17dp"
+                                    android:paddingRight="17dp"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:maxLines="1"
+                                    android:inputType="number"
+                                    android:maxLength="15"
+                                    android:background="@android:color/transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <!-- ICON -->
+                                <ImageView
+                                    android:id="@+id/username_icon"
+                                    app:srcCompat="@drawable/calendar"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_centerVertical="true"
+                                    />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2.5dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/blue_border_rounded_cornwe">
+
+                                <!-- INPUT -->
+                                <customfonts.EditText_Poppins_Regular
+                                    android:id="@+id/tvHasta"
+                                    android:layout_toRightOf="@+id/username_icon2"
+                                    android:hint="HASTA"
+                                    android:textSize="14sp"
+                                    android:paddingLeft="17dp"
+                                    android:paddingRight="17dp"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="15dp"
+                                    android:maxLines="1"
+                                    android:inputType="number"
+                                    android:maxLength="15"
+                                    android:background="@android:color/transparent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+
+                                <!-- ICON -->
+                                <ImageView
+                                    android:id="@+id/username_icon2"
+                                    app:srcCompat="@drawable/calendar"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_centerVertical="true"
+                                    />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginTop="5dp"
+                            >
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginBottom="5dp">
+
+                            <customfonts.Button_Poppins_Regular
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:background="@drawable/blue_border_rounded_cornwe"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:text="Buscar"
+                                android:layout_marginRight="5dp"/>
+                                <!-- ICON -->
+                                <ImageView
+                                    android:tint="@color/white"
+                                    android:elevation="2dp"
+                                    android:id="@+id/search_icon"
+                                    app:srcCompat="@drawable/search"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginLeft="24dp"
+                                    android:layout_centerVertical="true"
+                                    />
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp">
+
+                                <customfonts.Button_Poppins_Regular
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/colorPrimaryDark"
+                                    android:background="@drawable/blue_border_rounded_cornwe"
+                                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:text="Excel"
+                                    />
+
+                                <!-- ICON -->
+                                <ImageView
+                                    android:tint="@color/white"
+                                    android:elevation="2dp"
+                                    android:id="@+id/exe"
+                                    app:srcCompat="@drawable/excel"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginLeft="24dp"
+                                    android:layout_centerVertical="true"
+                                    />
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</LinearLayout>
