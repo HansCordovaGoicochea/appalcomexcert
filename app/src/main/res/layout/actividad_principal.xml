@@ -59,18 +59,18 @@
 
                         <!-- INPUT -->
                         <customfonts.EditText_Poppins_Regular
+                            android:textColorHint="@color/colorAccent"
                             android:id="@+id/tvNombres"
                             android:hint="Nombres"
-                            android:textSize="14sp"
-                            android:paddingLeft="17dp"
-                            android:paddingRight="17dp"
-                            android:paddingTop="15dp"
-                            android:paddingBottom="15dp"
+                            android:textSize="13sp"
+                            android:padding="12dp"
                             android:maxLines="1"
                             android:maxLength="15"
                             android:background="@android:color/transparent"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+
+                            android:text="WALTER"/>
 
                     </RelativeLayout>
 
@@ -84,13 +84,11 @@
 
                         <!-- INPUT -->
                         <customfonts.EditText_Poppins_Regular
+                            android:textColorHint="@color/colorAccent"
                             android:id="@+id/tvApellidos"
                             android:hint="Apellidos"
-                            android:textSize="14sp"
-                            android:paddingLeft="17dp"
-                            android:paddingRight="17dp"
-                            android:paddingTop="15dp"
-                            android:paddingBottom="15dp"
+                            android:textSize="13sp"
+                            android:padding="12dp"
                             android:maxLines="1"
                             android:maxLength="15"
                             android:background="@android:color/transparent"
@@ -109,13 +107,11 @@
 
                         <!-- INPUT -->
                         <customfonts.EditText_Poppins_Regular
+                            android:textColorHint="@color/colorAccent"
                             android:id="@+id/tvDNI"
                             android:hint="DNI"
-                            android:textSize="14sp"
-                            android:paddingLeft="17dp"
-                            android:paddingRight="17dp"
-                            android:paddingTop="15dp"
-                            android:paddingBottom="15dp"
+                            android:textSize="13sp"
+                            android:padding="12dp"
                             android:maxLines="1"
                             android:inputType="number"
                             android:maxLength="15"
@@ -139,6 +135,7 @@
                             android:layout_marginBottom="5dp">
 
                             <customfonts.Button_Poppins_Regular
+                                android:id="@+id/btBuscarP"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -164,28 +161,64 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+
+                            android:id="@+id/rlBtnMostrar"
                             android:layout_weight=".8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp">
 
                             <customfonts.Button_Poppins_Regular
+                                android:id="@+id/btBuscarEmp"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/colorPrimaryDark"
                                 android:background="@drawable/blue_border_rounded_cornwe"
-                                android:foreground="?attr/selectableItemBackground"
                                 android:textColor="@color/white"
                                 android:textStyle="bold"
-                                android:text="Buscar por empresa"
+                                android:text="Bus. por empresa"
                                 android:layout_marginRight="5dp"/>
+
                             <!-- ICON -->
                             <ImageView
                                 android:tint="@color/white"
                                 android:elevation="2dp"
                                 android:id="@+id/search_icon2"
-                                app:srcCompat="@drawable/search"
+                                app:srcCompat="@drawable/visibility_black_36dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_centerVertical="true"
+                                />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/rlBtnOcultar"
+                            android:layout_weight=".8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp">
+
+                            <customfonts.Button_Poppins_Regular
+                                android:id="@+id/btOcultarBuscarEmp"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:background="@drawable/blue_border_rounded_cornwe"
+
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:text="OCUL. BUS. EMP."
+                                android:layout_marginRight="5dp"/>
+                            <!-- ICON -->
+                            <ImageView
+                                android:tint="@color/white"
+                                android:elevation="2dp"
+                                app:srcCompat="@drawable/visibility_off_black_36dp"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_marginLeft="5dp"
@@ -243,6 +276,7 @@
 
 
                             <Spinner
+                                android:id="@+id/spEntidades"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 />
@@ -261,11 +295,8 @@
                             <customfonts.EditText_Poppins_Regular
                                 android:id="@+id/tvRuc"
                                 android:hint="RUC"
-                                android:textSize="14sp"
-                                android:paddingLeft="17dp"
-                                android:paddingRight="17dp"
-                                android:paddingTop="15dp"
-                                android:paddingBottom="15dp"
+                                android:textSize="13sp"
+                                android:padding="12dp"
                                 android:maxLines="1"
                                 android:inputType="number"
                                 android:maxLength="15"
@@ -285,6 +316,7 @@
 
 
                             <Spinner
+                                android:id="@+id/spEmpresas"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 />
@@ -313,14 +345,11 @@
                                     android:id="@+id/tvDesde"
                                     android:layout_toRightOf="@+id/username_icon"
                                     android:hint="DESDE"
-                                    android:textSize="14sp"
-                                    android:paddingLeft="17dp"
-                                    android:paddingRight="17dp"
-                                    android:paddingTop="15dp"
-                                    android:paddingBottom="15dp"
-                                    android:maxLines="1"
-                                    android:inputType="number"
-                                    android:maxLength="15"
+                                    android:textSize="13sp"
+                                    android:padding="12dp"
+                                    android:clickable="true"
+                                    android:editable="false"
+                                    android:focusable="false"
                                     android:background="@android:color/transparent"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>
@@ -351,14 +380,11 @@
                                     android:id="@+id/tvHasta"
                                     android:layout_toRightOf="@+id/username_icon2"
                                     android:hint="HASTA"
-                                    android:textSize="14sp"
-                                    android:paddingLeft="17dp"
-                                    android:paddingRight="17dp"
-                                    android:paddingTop="15dp"
-                                    android:paddingBottom="15dp"
-                                    android:maxLines="1"
-                                    android:inputType="number"
-                                    android:maxLength="15"
+                                    android:textSize="13sp"
+                                    android:padding="12dp"
+                                    android:clickable="true"
+                                    android:editable="false"
+                                    android:focusable="false"
                                     android:background="@android:color/transparent"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"/>
@@ -394,6 +420,7 @@
                                 android:layout_marginBottom="5dp">
 
                             <customfonts.Button_Poppins_Regular
+                                android:id="@+id/btnBuscarPbyE"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -426,6 +453,7 @@
                                 android:layout_marginBottom="5dp">
 
                                 <customfonts.Button_Poppins_Regular
+                                    android:id="@+id/exportExcel"
                                     android:layout_weight="1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
