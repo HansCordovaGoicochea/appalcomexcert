@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        android:src="@drawable/logo_alcomex"
+        android:layout_gravity="center_horizontal|top"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal|center_vertical"
+            >
+
+            <customfonts.Button_Poppins_Regular
+                android:id="@+id/btnConsultas"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/blue_border_rounded_cornwe"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="CONSULTAS"
+                android:layout_marginRight="5dp"/>
+
+            <customfonts.Button_Poppins_Regular
+                android:id="@+id/btnInscripciones"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/blue_border_rounded_cornwe"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Inscripciones"
+                android:layout_marginRight="5dp"/>
+
+            <customfonts.Button_Poppins_Regular
+                android:id="@+id/btnIngreso"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/blue_border_rounded_cornwe"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Ingreso"
+                android:layout_marginRight="5dp"/>
+
+            <customfonts.Button_Poppins_Regular
+                android:id="@+id/btnEncuestas"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/blue_border_rounded_cornwe"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Encuestas"
+                android:layout_marginRight="5dp"/>
+            <customfonts.Button_Poppins_Regular
+                android:id="@+id/btnSalir"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:background="@drawable/blue_border_rounded_cornwe"
+                android:foreground="?attr/selectableItemBackground"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Salir"
+                android:layout_marginRight="5dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/footer_logos"/>
+
+
+</LinearLayout>

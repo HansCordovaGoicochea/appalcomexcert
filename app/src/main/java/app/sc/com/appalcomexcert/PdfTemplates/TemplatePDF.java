@@ -55,6 +55,7 @@ public class TemplatePDF extends AsyncTask<Void, Void, Boolean> {
     private Font fText = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     private Font fHighText = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, BaseColor.RED);
     private Font fDatos = new Font(Font.FontFamily.TIMES_ROMAN, 21);
+    private Font fsDatos = new Font(Font.FontFamily.TIMES_ROMAN, 18);
     private Font fDatos2 = new Font(Font.FontFamily.TIMES_ROMAN, 19, Font.ITALIC);
 
 
@@ -98,7 +99,11 @@ public class TemplatePDF extends AsyncTask<Void, Void, Boolean> {
         openDocument();
         addMetaData("Certificado", "alcomex", "alcomex");
 
+
         try{
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String pattern = "dd/MM/yyyy";
+            SimpleDateFormat fmtOut = new SimpleDateFormat(pattern);
             //x es > ancho
             //y es > alto
             PdfContentByte cb1 = pdfWriter.getDirectContent();
@@ -117,6 +122,37 @@ public class TemplatePDF extends AsyncTask<Void, Void, Boolean> {
             ct.setSimpleColumn(new Phrase(new Chunk("Curso: "+_certificado.getCurso()+"\n"+(int)(_certificado.getHoras_teorias()+_certificado.getHoras_practicas())+" Horas", fDatos)),
                     300, 240, 750, 36, 25, Element.ALIGN_CENTER);
             ct.go();
+
+
+            // nro registro
+            setPara(pdfWriter.getDirectContent(), new Phrase(_certificado.getRegistro_certificado(), fsDatos), 710, 15);
+
+            // fecha
+            Date fechas = formato.parse(_certificado.getFecha_hora_sesion());
+            String fechaServ = fmtOut.format(fechas);
+            setPara(pdfWriter.getDirectContent(), new Phrase(fechaServ, fsDatos), 650, 70);
+
+//            firma
+//            Bitmap bitmap = ((BitmapDrawable) this._ipdf.getContext().getResources().getDrawable(R.drawable.firma)).getBitmap();
+//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+//            Paragraph paragraph1 = new Paragraph();
+//            paragraph1.setAlignment(Element.ALIGN_LEFT);
+//            Image instance = Image.getInstance(byteArrayOutputStream.toByteArray());
+//            instance.scaleAbsolute(150, 50);
+//            paragraph1.add((Element) new Chunk(instance, 360.0f, -490.0f, false));
+//            document.add(paragraph1);
+
+//            qr
+            Bitmap bitmap = ((BitmapDrawable) this._ipdf.getContext().getResources().getDrawable(R.drawable.qr_alcomex)).getBitmap();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            Paragraph paragraph1 = new Paragraph();
+            paragraph1.setAlignment(Element.ALIGN_LEFT);
+            Image instance = Image.getInstance(byteArrayOutputStream.toByteArray());
+            instance.scaleAbsolute(100, 100);
+            paragraph1.add((Element) new Chunk(instance, 180.0f, -440.0f, false));
+            document.add(paragraph1);
 
 
             closeDocument();

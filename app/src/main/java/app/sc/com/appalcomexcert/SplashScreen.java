@@ -211,7 +211,7 @@ public class SplashScreen extends AppCompatActivity {
 //                    Bundle args = new Bundle();
 //                    args.putSerializable("entidades", entidadesList);
 //                    args.putSerializable("empresas", empresasList);
-                    Intent intent = new Intent(SplashScreen.this, ActividadPrincipal.class);
+                    Intent intent = new Intent(SplashScreen.this, ActividadInicio.class);
 //                    intent.putExtras(args);
                     intent.putExtra("entidades", entidadesList);
                     intent.putExtra("empresas", empresasList);

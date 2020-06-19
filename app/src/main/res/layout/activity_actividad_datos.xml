@@ -17,6 +17,7 @@
         />
 
     <androidx.core.widget.NestedScrollView
+        android:layout_weight="1"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -30,5 +31,11 @@
 
         </androidx.core.widget.NestedScrollView>
 
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/footer_logos"/>
 
 </LinearLayout>

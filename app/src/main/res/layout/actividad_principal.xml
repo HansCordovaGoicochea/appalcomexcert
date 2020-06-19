@@ -10,8 +10,8 @@
     <ImageView
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
         android:src="@drawable/logo_alcomex"
         android:layout_gravity="center_horizontal|top"
         />
@@ -25,6 +25,7 @@
         android:layout_marginBottom="3dp"/>
 
     <androidx.core.widget.NestedScrollView
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -63,7 +64,7 @@
                             android:id="@+id/tvNombres"
                             android:hint="Nombres"
                             android:textSize="13sp"
-                            android:padding="12dp"
+                            android:padding="10dp"
                             android:maxLines="1"
                             android:maxLength="15"
                             android:background="@android:color/transparent"
@@ -88,7 +89,7 @@
                             android:id="@+id/tvApellidos"
                             android:hint="Apellidos"
                             android:textSize="13sp"
-                            android:padding="12dp"
+                            android:padding="10dp"
                             android:maxLines="1"
                             android:maxLength="15"
                             android:background="@android:color/transparent"
@@ -111,7 +112,7 @@
                             android:id="@+id/tvDNI"
                             android:hint="DNI"
                             android:textSize="13sp"
-                            android:padding="12dp"
+                            android:padding="10dp"
                             android:maxLines="1"
                             android:inputType="number"
                             android:maxLength="15"
@@ -296,7 +297,7 @@
                                 android:id="@+id/tvRuc"
                                 android:hint="RUC"
                                 android:textSize="13sp"
-                                android:padding="12dp"
+                                android:padding="10dp"
                                 android:maxLines="1"
                                 android:inputType="number"
                                 android:maxLength="15"
@@ -346,7 +347,7 @@
                                     android:layout_toRightOf="@+id/username_icon"
                                     android:hint="DESDE"
                                     android:textSize="13sp"
-                                    android:padding="12dp"
+                                    android:padding="10dp"
                                     android:clickable="true"
                                     android:editable="false"
                                     android:focusable="false"
@@ -381,7 +382,7 @@
                                     android:layout_toRightOf="@+id/username_icon2"
                                     android:hint="HASTA"
                                     android:textSize="13sp"
-                                    android:padding="12dp"
+                                    android:padding="10dp"
                                     android:clickable="true"
                                     android:editable="false"
                                     android:focusable="false"
@@ -494,7 +495,11 @@
     </androidx.core.widget.NestedScrollView>
 
 
-
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/footer_logos"/>
 
 
 </LinearLayout>

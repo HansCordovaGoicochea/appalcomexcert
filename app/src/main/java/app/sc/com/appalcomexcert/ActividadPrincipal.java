@@ -9,6 +9,8 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +20,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,16 +59,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import app.sc.com.appalcomexcert.Actividades.ActividadDatos;
 import app.sc.com.appalcomexcert.Clases.Certificado;
 import app.sc.com.appalcomexcert.Clases.Empresas;
 import app.sc.com.appalcomexcert.Clases.Entidades;
+import app.sc.com.appalcomexcert.Clases.Excel;
 import app.sc.com.appalcomexcert.Clases.Persona;
 import app.sc.com.appalcomexcert.ExcelTemplate.ExportDatabaseCSVTask;
+import app.sc.com.appalcomexcert.ExcelTemplate.IGenerarExcel;
 import app.sc.com.appalcomexcert.Utils.Constantes;
 
-public class ActividadPrincipal extends AppCompatActivity {
+public class ActividadPrincipal extends AppCompatActivity implements IGenerarExcel {
     private static final int WRITE_EXTERNAL_STORAGE = 1;
     private static final int READ_EXTERNAL_STORAGE = 2;
     private static boolean isRationale = true;
@@ -77,6 +85,7 @@ public class ActividadPrincipal extends AppCompatActivity {
     ProgressDialog pd;
     RelativeLayout rlBtnMostrar, rlBtnOcultar;
     private List<Persona> personasList = new ArrayList<Persona>();
+    private List<Excel> excelList = new ArrayList<Excel>();
 
     ArrayList<Parcelable> entidades;
     ArrayList<Parcelable> empresas;
@@ -91,6 +100,13 @@ public class ActividadPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_principal);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             askPermissions(true);
@@ -375,8 +391,27 @@ public class ActividadPrincipal extends AppCompatActivity {
         exportarExcel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExportDatabaseCSVTask task=new ExportDatabaseCSVTask(ActividadPrincipal.this);
-                task.execute();
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+                Date date_desde = null;
+                Date date_hasta = null;
+                try {
+                    date_desde = fmt.parse(String.valueOf(tvDesde.getText()));
+                    date_hasta = fmt.parse(String.valueOf(tvHasta.getText()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String s_desde = "";
+                String s_hasta = "";
+                if (date_desde != null && date_hasta != null){
+                    SimpleDateFormat fmtOut = new SimpleDateFormat(pattern);
+                    s_desde = fmtOut.format(date_desde);
+                    s_hasta = fmtOut.format(date_hasta);
+                }
+
+
+                new JsonTaskExcel().execute(Constantes.BASE_URL_EXCEL+"&nombres="+tvNombres.getText()+"&apellidos="+tvApellidos.getText()+"&dni="+tvDNI.getText()+"&entidad="+ruc_entidad+"&ruc_entidad="+tvRuc.getText()+"&ruc_empresa="+ruc_empresa+"&desde="+s_desde+"&hasta="+s_hasta);
+
             }
         });
 
@@ -568,4 +603,200 @@ public class ActividadPrincipal extends AppCompatActivity {
         return true;
     }
 
+
+    private class JsonTaskExcel extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+
+                Log.e("Response URL" , String.valueOf(params[0]));
+                URL url = new URL(params[0]);
+
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(15000);
+                connection.setConnectTimeout(10000);
+                connection.setRequestMethod("GET");
+                //set input and output descript
+                connection.setDoInput(true);
+                connection.setDoOutput(false); // in needed?
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                }
+
+//                Log.e("Response Code" , buffer.toString());
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            if (result != null){
+                //parse JSON data
+                try {
+                    Excel excel = null;
+                    excelList.clear();
+                    JSONArray jArray = new JSONArray(result);
+                    for(int i=0; i < jArray.length(); i++) {
+
+                        JSONObject jObject = jArray.getJSONObject(i);
+                        int id_capacitacion = jObject.getInt("id_capacitacion");
+                        int id_curso = jObject.getInt("id_curso");
+                        String nombre_curso = jObject.getString("nombre_curso");
+                        int id_tema = jObject.getInt("id_tema");
+                        String detalle_tema = jObject.getString("detalle_tema");
+                        String fecha_hora_sesion = jObject.getString("fecha_hora_sesion");
+                        String horas_teoricas = jObject.getString("horas_teoricas");
+                        String horas_practicas = jObject.getString("horas_practicas");
+                        int id_instructor = jObject.getInt("id_instructor");
+                        String fotocheck_inst = jObject.getString("fotocheck_inst");
+                        String instructor_dni = jObject.getString("instructor_dni");
+                        String instructor = jObject.getString("instructor");
+                        String fotocheck_part = jObject.getString("fotocheck_part");
+                        String participante_dni = jObject.getString("participante_dni");
+                        String participante = jObject.getString("participante");
+                        String nota_pre_test = jObject.getString("nota_pre_test");
+                        String nota_pos_test = jObject.getString("nota_pos_test");
+                        String nota_oral = jObject.getString("nota_oral");
+                        String aprobo_sesion = jObject.getString("aprobo_sesion");
+                        String nota_caso_estudio = jObject.getString("nota_caso_estudio");
+                        String aprobo_caso_estudio = jObject.getString("aprobo_caso_estudio");
+                        String situacion_final = jObject.getString("situacion_final");
+                        String empresa = jObject.getString("empresa");
+                        String area = jObject.getString("area");
+                        String cargo = jObject.getString("cargo");
+                        String vehiculo = jObject.getString("vehiculo");
+                        String marca = jObject.getString("marca");
+                        String modelo = jObject.getString("modelo");
+                        String tm = jObject.getString("tm");
+                        String oportunidad = jObject.getString("oportunidad");
+                        String observacion = jObject.getString("observacion");
+                        String registro_certificado = jObject.getString("registro_certificado");
+
+                        excel = new Excel(
+                                id_capacitacion,
+                                id_curso,
+                                nombre_curso,
+                                id_tema,
+                                detalle_tema,
+                                fecha_hora_sesion,
+                                horas_teoricas,
+                                horas_practicas,
+                                id_instructor,
+                                fotocheck_inst,
+                                instructor_dni,
+                                instructor,
+                                fotocheck_part,
+                                participante_dni,
+                                participante,
+                                nota_pre_test,
+                                nota_pos_test,
+                                nota_oral,
+                                aprobo_sesion,
+                                nota_caso_estudio,
+                                aprobo_caso_estudio,
+                                situacion_final,
+                                empresa,
+                                area,
+                                cargo,
+                                vehiculo,
+                                marca,
+                                modelo,
+                                tm,
+                                oportunidad,
+                                observacion,
+                                registro_certificado);
+                        excelList.add(excel);
+
+                    } // End Loop
+
+                    ExportDatabaseCSVTask task=new ExportDatabaseCSVTask(ActividadPrincipal.this, excelList);
+                    task.execute();
+
+                } catch (JSONException e) {
+                    Log.e("JSONException", "Error: " + e.toString());
+                } // catch (JSONException e)
+            }else{
+                Toast.makeText(ActividadPrincipal.this, "No hay datos", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void finishGeneratedExcel(String s) {
+
+        if (s.isEmpty()){
+            Toast.makeText(getContext(), "Exportado con exito!", Toast.LENGTH_SHORT).show();
+
+            File externalStorageDirectory = Environment.getExternalStorageDirectory();
+            StringBuilder sb = new StringBuilder();
+            sb.append("alcomex/");
+            sb.append("cap"); // esta parte se puede hacer dinamica
+            sb.append(".csv");
+            File file = new File(externalStorageDirectory, sb.toString());
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(file), "text/csv");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
+                startActivity(Intent.createChooser(intent, "Abriendo CSV"));
+            } catch (ActivityNotFoundException unused) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.microsoft.office.excel")));
+            }
+
+        }
+        else {
+            Toast.makeText(getContext(), "Fallo la exportación!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public Context getContext() {
+        return ActividadPrincipal.this;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
 }
